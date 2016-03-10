@@ -10,7 +10,7 @@ Feature: Systemd package split
 
     Scenario: systemd package split
         Given systemd package is split to subpackages
-        When systemd binary package is built
+        When systemd subpackages are built
         Then systemd-container.rpm subpackage is built
         And systemd-udev.rpm is built
 
