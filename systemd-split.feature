@@ -31,10 +31,23 @@ Feature: Systemd package split
         And the subpackage should provide udev rules
         And the subpackage should provide the hardware database
 
-    Scenario: system upgrade
+    Scenario: system upgrade without virtualization
         Given previous major version of Fedora is installed
         When upgrade to Fedora 24 is performed
         Then in upgraded system there is systemd.rpm package installed
         And systemd-udev.rpm is installed
+
+    Scenario: system upgrade with virtualization
+        Given previous major version of Fedora is installed
+        And there are VMs or containers managed by the host system
+        When upgrade to Fedora 24 is performed
+        Then in upgraded system there is systemd.rpm package installed
+        And systemd-udev.rpm is installed
         And systemd-container.rpm is installed
+
+    Scenario: upgrade of container guest system
+        Given previous major version of Fedora is installed
+        And the system runs in containec
+        When upgrade to Fedora 24 is performed
+        Then in upgraded system there is systemd.rpm package installed
 
